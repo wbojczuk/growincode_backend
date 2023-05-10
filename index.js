@@ -127,7 +127,7 @@ router.get("/latestblogs/:amount", async (req,res)=>{
 
 router.get("/blogsbycategory/:category", async (req,res)=>{
     try{
-        const result = await db.blogDatabase.collection("blog").find({"metadata.tags": (req.params.category).replaceAll("_", " ")}, {projection: {metadata: 1}})
+        const result = await db.blogDatabase.collection("blog").find({"metadata.tags": (`${req.params.category}`).replaceAll("_", " ")}, {projection: {metadata: 1}})
         .sort({_id: 1})
         .limit(parseInt(req.params.amount)).toArray();
         res.json(result);
