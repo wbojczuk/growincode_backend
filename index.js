@@ -59014,7 +59014,7 @@ app.use(session({
     saveUninitialized: true,
   }));
 
-const whitelist = ["https://growincode-frontend.pages.dev"];
+const whitelist = ["https://growincode-frontend.pages.dev", "https://growincode-backend.onrender.com"];
 const corsOptions = {
     origin: (origin, callback)=>{
         if(whitelist.includes(origin) || !origin){
