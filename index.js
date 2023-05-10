@@ -205,8 +205,19 @@ const client = new MongoClient("mongodb+srv://wbojczuk:Pq7MPoIAmKRcDMGa@cluster0
 
 const db = {
     connect: async ()=>{client.connect(); return true},
-    disconnect: async ()=>{client.close(); return true},
     blogDatabase: client.db("grow_in_code"),
+}
+
+testConnection();
+async function testConnection(){
+  try{
+    db.connect();
+    await db.blogDatabase.command({ ping: 1 });
+   console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  }catch(err){
+    console.log(err);
+  }
+  
 }
 
 module.exports = { db };
@@ -59014,7 +59025,7 @@ app.use(session({
     saveUninitialized: true,
   }));
 
-const whitelist = ["https://growincode-frontend.pages.dev", "https://growincode-backend.onrender.com"];
+const whitelist = ["https://growincode-frontend.pages.dev", "https://growincode-backend.onrender.com", "http://localhost", "http://localhost:3000"];
 const corsOptions = {
     origin: (origin, callback)=>{
         if(whitelist.includes(origin) || !origin){
